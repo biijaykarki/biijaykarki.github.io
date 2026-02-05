@@ -4,81 +4,109 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Will You Be My Valentine?</title>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
 <style>
-  body{
-    font-family: Arial, sans-serif;
-    background:#ffe6ee;
-    min-height:100vh;
-    margin:0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-  }
-  .card{
-    background:#fff;
-    padding:40px 28px;
-    border-radius:14px;
-    text-align:center;
-    width:min(520px, 92vw);
-    box-shadow:0 12px 30px rgba(0,0,0,.15);
-  }
-  h1{ margin:0 0 10px; }
-  p{ margin:0 0 18px; font-size:16px; }
-  .btns{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
-  button{
-    padding:12px 22px;
-    font-size:16px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-  }
-  .yes{ background:#ff4d6d; color:#fff; }
-  .no{ background:#d9d9d9; }
-  #response{ margin-top:18px; font-size:18px; font-weight:600; }
+body{
+  font-family: Arial, sans-serif;
+  background:#ffe6ee;
+  min-height:100vh;
+  margin:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.card{
+  background:#fff;
+  padding:40px 28px;
+  border-radius:14px;
+  text-align:center;
+  width:min(520px,92vw);
+  box-shadow:0 12px 30px rgba(0,0,0,.15);
+}
+
+h1{margin:0 0 10px;}
+p{margin:0 0 18px;font-size:16px;}
+
+.btns{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+}
+
+button{
+  padding:12px 22px;
+  font-size:16px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.yes{background:#ff4d6d;color:white;}
+.no{background:#d9d9d9;}
+
+#response{
+  margin-top:20px;
+  font-size:20px;
+  font-weight:600;
+}
 </style>
 </head>
+
 <body>
-  <div class="card">
-    <h1>Hi Baa ❤️</h1>
-    <h1>Will you be my Valentine? ❤️</h1>
-    <p>Click honestly. We got this.</p>
+<div class="card">
+  <h1>Hi Baa ❤️</h1>
+  <h1>Will you be my Valentine?</h1>
 
-    <div class="btns">
-      <button class="yes" onclick="yes()">Yes</button>
-      <button class="no" id="noBtn" onclick="no()">No</button>
-    </div>
+  <p>Click honestly. We got this.</p>
 
-    <div id="response"></div>
+  <div class="btns">
+    <button class="yes" id="yesBtn" onclick="yes()">Yes</button>
+    <button class="no" id="noBtn" onclick="no()">No</button>
   </div>
 
+  <div id="response"></div>
+</div>
+
 <script>
-  let noCount = 0;
-  const responses = [
-    "Try again 😄",
-    "That button seems confused.",
-    "Be serious.",
-    "Ok, now you’re just testing me.",
-    "No accepted. (Just kidding.)"
-  ];
+let noCount = 0;
 
-  function yes() {
-    document.getElementById("response").textContent = "Now can I have my gift? iPad Pro? ❤️";
-    document.getElementById("noBtn").disabled = true;
+const responses = [
+  "Try again 😄",
+  "That button seems confused.",
+  "Be serious.",
+  "Ok now you’re just testing me.",
+  "No removed from system."
+];
+
+function yes(){
+  document.getElementById("response").textContent =
+    "You just made me very happy ❤️ Now can I have my gift… iPad Pro? 😌";
+
+  document.getElementById("yesBtn").disabled = true;
+  document.getElementById("noBtn").disabled = true;
+
+  confetti({
+    particleCount:150,
+    spread:90,
+    origin:{y:0.6}
+  });
+}
+
+function no(){
+  noCount++;
+  document.getElementById("response").textContent =
+    responses[Math.min(noCount-1,responses.length-1)];
+
+  if(noCount>=2){
+    const btn=document.getElementById("noBtn");
+    const x=Math.random()*200-100;
+    const y=Math.random()*140-70;
+    btn.style.transform=`translate(${x}px,${y}px)`;
   }
-
-  function no() {
-    noCount++;
-    const msg = responses[Math.min(noCount - 1, responses.length - 1)];
-    document.getElementById("response").textContent = msg;
-
-    // Make the "No" button run away a bit after a couple clicks
-    if (noCount >= 2) {
-      const btn = document.getElementById("noBtn");
-      const x = Math.floor(Math.random() * 180) - 90;
-      const y = Math.floor(Math.random() * 120) - 60;
-      btn.style.transform = `translate(${x}px, ${y}px)`;
-    }
-  }
+}
 </script>
 </body>
 </html>
