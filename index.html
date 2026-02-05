@@ -12,11 +12,12 @@ body{
   font-family: Arial, sans-serif;
   min-height:100vh;
   margin:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
 
-  /* Background photo with dark overlay */
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding-top:40px;
+
   background:
     linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)),
     url('IMG_4271.JPG');
@@ -24,6 +25,12 @@ body{
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
+}
+
+.top-text{
+  color:white;
+  text-align:center;
+  margin-bottom:20px;
 }
 
 .card{
@@ -35,7 +42,6 @@ body{
   box-shadow:0 12px 30px rgba(0,0,0,.25);
 }
 
-h1{margin:0 0 10px;}
 p{margin:0 0 18px;font-size:16px;}
 
 .btns{
@@ -64,10 +70,13 @@ button{
 </head>
 
 <body>
-<div class="card">
+
+<div class="top-text">
   <h1>Hi Baa ❤️</h1>
   <h1>Will you be my Valentine?</h1>
+</div>
 
+<div class="card">
   <p>Click honestly. We got this.</p>
 
   <div class="btns">
@@ -116,5 +125,6 @@ function no(){
   }
 }
 </script>
+
 </body>
 </html>
